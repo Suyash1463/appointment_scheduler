@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home','Home')}"
+>
+
+<body>
+<div class="row mt-3">
+    <div class="col">
+
+    </div>
+    <div class="col-10">
+        <div id='calendar'></div>
+    </div>
+    <div class="col">
+
+    </div>
+</div>
+
+<script th:inline="javascript">
+    $(function () {
+        $('#calendar').fullCalendar({
+            defaultView: 'agendaWeek',
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek'
+            },
+            allDaySlot: false,
+            minTime: "06:00:00",
+            maxTime: "22:00:00",
+            timeFormat: 'H:mm', // uppercase H for 24-hour clock,
+            firstDay: 1,
+            eventSources: [
+
+                {
+                    url: /*[[${'/api/user/'+user.id+'/appointments'}]]*/ '/api/user/1/appointments',
+                    color: 'yellow',
+                    textColor: 'black'
+
+                }
+            ]
+        })
+
+    });
+</script>
+</body>
+
+</html>
